@@ -25,7 +25,8 @@ The app allows users to create, view, update, and delete todos with a REST API b
 ---
 
 ## 🖥️ Screenshots
-(Add screenshots here if you want)
+<img width="1333" height="416" alt="image" src="https://github.com/user-attachments/assets/443bcc99-320b-42ed-a93a-43936f2f141b" />
+
 
 ---
 
