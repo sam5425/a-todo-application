@@ -1,0 +1,56 @@
+import React, { useEffect, useState } from "react";
+
+function Edit_todo({ todo }) {
+ 
+
+const [description,setDescription] = useState(todo.description);
+//edit descritpion 
+const updateDescription = async () => {
+  try {
+    const body = { description };
+
+    const response = await fetch(
+      `http://localhost:5000/todos/${todo.todo_id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify(body),
+      }
+    );
+
+    window.location = "/";
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+  return (
+    <>
+   
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#id${todo.todo_id}`}>
+  Edit
+</button>
+
+
+<div class="modal fade" id={`id${todo.todo_id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Todo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"onClick={() => setDescription(todo.description)}></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" className="form-control" value={description} onChange={e => setDescription(e.target.value)}/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bg-danger" data-bs-dismiss="modal" onClick={() => setDescription(todo.description)}>Close</button>
+        <button type="button" class="btn btn-primary bg-success" onClick={e => updateDescription(e)}>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </>
+  );
+}
+
+export default Edit_todo;
